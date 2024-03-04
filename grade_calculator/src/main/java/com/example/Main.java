@@ -10,31 +10,26 @@ public class Main {
         ArrayList<String> subjectMarkList = new ArrayList<>();
         HashMap<String, Integer> subjectMarkMap = new HashMap<>();
 
-
-        // enter the  marks of each subject
-        // System.out.print("Enter subject and mark e.g. Maths-55 (or 'continue' to exit): ");
-        String subjectAndMArk = "";
-        while (subjectAndMArk != "continue") {
-            if (subjectAndMArk.equalsIgnoreCase("continue")) {
-                // subjectMarkList.remove(-1);
-                break; // Exit the loop if user enters 'quit'
+        String subjectAndMark = "";
+        while (subjectAndMark != "continue") {
+            if (subjectAndMark.equalsIgnoreCase("continue")) {
+                break; // Exit the loop if user enters 'continue'
             }
 
-            System.out.print("Enter subject and mark e.g. Maths-55 (or 'continue' to exit): \n");
-            subjectAndMArk = sc.nextLine();
-            subjectMarkList.add(subjectAndMArk);
+            System.out.println("Enter subject and mark e.g. Maths-55 (or 'continue' to exit): ");
+            subjectAndMark = sc.nextLine();
+            subjectMarkList.add(subjectAndMark);
 
         }
         if  (!subjectMarkList.isEmpty()) {
             subjectMarkList.remove(subjectMarkList.size() - 1);
+            System.out.println();
         } else {
             System.out.println("No data entered.");
         }
 
         
         for (int i = 0; i < subjectMarkList.size(); i++){
-            // display the subject and mark list
-            // System.out.println(subjectMarkList.get(i));
             String [] info =  subjectMarkList.get(i).split("-");
             try {
                 subjectMarkMap.put(info[0].toUpperCase(), Integer.parseInt(info[1]));
@@ -51,7 +46,7 @@ public class Main {
         
         int numSubjects = subjectMarkList.size();
 
-        //sum the values of map
+        //sum the values inside the map
         int sum = 0; 
         for (int currentValue : subjectMarkMap.values()){
             sum+= currentValue;
@@ -60,7 +55,7 @@ public class Main {
         double percentage = (double)sum / numSubjects;
                 // give a grade based on the percentage
                 String grade;
-                switch( (int) percentage/ 10) {
+                switch((int) percentage/ 10) {
                     case 10:
                     case 9:
                     case 8:
