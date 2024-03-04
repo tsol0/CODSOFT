@@ -1,45 +1,54 @@
 package com.example;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 
 public class Main {
     public static void main(String[] args) {
-        HashMap<String, Integer> subjectMarks = new HashMap<>();
-
         Scanner  sc = new Scanner(System.in);
-        // get user name
-        // System.out.println("Enter your name:");
-        String  name = sc.nextLine();
-        System.out.println("Hello  " + name + "");
+        ArrayList<String> subjectMarkList = new ArrayList<>();
+        HashMap<String, Integer> subjectMarkMap = new HashMap<>();
 
-        System.out.println("Enter number of subjects you take");
-        int numSubjects = sc.nextInt();
-        int count = 0;
-        while (count != numSubjects){
-            System.out.println("Enter subject name and mark");
-            String subject = sc.nextLine();
-                subjectMarks.put(subject,0);
-            // String[] splitNameAndGrade = data.split(" ");
-            count++;
+
+        // enter the  marks of each subject
+        // System.out.print("Enter subject and mark e.g. Maths-55 (or 'continue' to exit): ");
+        String subjectAndMArk = "";
+        while (subjectAndMArk != "continue") {
+            if (subjectAndMArk.equalsIgnoreCase("continue")) {
+                // subjectMarkList.remove(-1);
+                break; // Exit the loop if user enters 'quit'
+            }
+
+            System.out.print("Enter subject and mark e.g. Maths-55 (or 'continue' to exit): ");
+            subjectAndMArk = sc.nextLine();
+            subjectMarkList.add(subjectAndMArk);
+
+        }
+        if  (!subjectMarkList.isEmpty()) {
+            subjectMarkList.remove(subjectMarkList.size() - 1);
+        } else {
+            System.out.println("No data entered.");
         }
 
-        // for (int num = 0; num <= numSubjects - 1 ; num++) {
-        //     // System.out.print("\n Enter subject "+ num+": ");
-        //     System.out.println("Enter subject name");
-        //     String subject = sc.next();
-        //     System.out.println("Enter subject mark");
-
-        //     int mark  = sc.nextInt();
-        //     String[] splitNameAndGrade = data.split(" ");
-        //     String subject = splitNameAndGrade[0];
-        //     int mark = Integer.parseInt(splitNameAndGrade[1]); 
-        // }
-
-        for (String l : subjectMarks.keySet()){
-            System.out.println(l+" "+ subjectMarks.get(l));
-        }
         
+        for (int i = 0; i < subjectMarkList.size(); i++){
+            // display the subject and mark list
+            // System.out.println(subjectMarkList.get(i));
+            String [] data =  subjectMarkList.get(i).split("-");
+            try {
+                subjectMarkMap.put(data[0].toLowerCase(), Integer.parseInt(data[1]));
+            } catch (Exception e) {
+                // TODO: handle exception
+                System.out.println(e);
+            }
+        }
+
+        for (String i : subjectMarkMap.keySet()) {
+            System.out.println(i + " - " + subjectMarkMap.get(i));
+          }
+
+
         sc.close();
 
 
