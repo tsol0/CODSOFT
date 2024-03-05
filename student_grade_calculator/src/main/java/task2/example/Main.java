@@ -34,7 +34,6 @@ public class Main {
             try {
                 subjectMarkMap.put(info[0].toUpperCase(), Integer.parseInt(info[1]));
             } catch (Exception e) {
-                // TODO: handle exception
                 System.out.println(e);
             }
         }
@@ -51,7 +50,7 @@ public class Main {
         for (int currentValue : subjectMarkMap.values()){
             sum+= currentValue;
         }
-        System.out.printf("\nTotal Mark : %d", sum);
+        System.out.printf("\nTotal Marks : %d", sum);
         double percentage = (double)sum / numSubjects;
                 // give a grade based on the percentage
                 String grade;
