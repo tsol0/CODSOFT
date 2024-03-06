@@ -10,9 +10,16 @@ public class Main {
         int randomNum = random.nextInt(1,100);
         int user_guess = 0;
         int guess_count = 0;
+
         while (user_guess != randomNum){
-            System.out.println("Guess the number generated");
-            user_guess = sc.nextInt();
+            try {
+                System.out.println("Guess the number generated");
+                user_guess = Integer.parseInt(sc.nextLine());
+            } catch (Exception e) {
+                System.out.println("PLease enter valid number");
+                continue;
+            }
+
             guess_count++;
             if (user_guess > randomNum){
                 System.out.println("Your guess is too high! Try again.");
@@ -20,14 +27,16 @@ public class Main {
                 System.out.println("Your guess is too low! Try again.");
             }
 
+            System.out.printf("Guess attempt : %d\n", guess_count);
+
             if (guess_count == 3){
-                System.out.printf("\nYou have reached your limit of guesses %d", guess_count);
+                System.out.printf("You have reached your limit of guesses %d\n", guess_count);
                 break;
             }
         }
+        System.out.println("The number is " + randomNum);
 
         sc.close();
-
 
 
     }
