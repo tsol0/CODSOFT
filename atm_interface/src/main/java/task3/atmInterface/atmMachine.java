@@ -31,17 +31,52 @@ public abstract class atmMachine implements atm{
         return  clientsAccounts.get(accountNumber);
     }
 
+    public void setCurrentAccountNo(int accountNumber){
+        this.currentAccountNumber = accountNumber;
+    }
+
     public atmMachine(client client){
         this.client = client;
     }
     
-    private double getBalance(int currentAccountNumber) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getClientBalance'");
+    public static double getBalance(int currentAccountNumber) {
+        for (Map.Entry<Integer, client>  entry : clientsAccounts.entrySet()) {
+            client client = entry.getValue();
+            if (client.getAccountNumber() == currentAccountNumber){
+                return client.getClientBalance();
+            }
+        }
+        System.out.println( "Invalid Account Number" );
+        return -1;       
     }
-    private void updateBalance(int currentAccountNumber, double currentBalance) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateBalance'");
+
+    private void updateBalance(int currentAccountNumber, double newBalance) {
+        client client = clientsAccounts.get(currentAccountNumber);
+        if  (client != null) {
+           client.setClientBalance(newBalance);
+        } 
+    }
+
+    public int getAccountNumber(int accountNumber) {
+        client client = clientsAccounts.get(accountNumber);
+        if (client != null) return client.getAccountNumber();
+        return -1;
+    }
+
+
+    public int getPin(int accountNumber) {
+        client client = clientsAccounts.get(accountNumber);
+        if (client != null) return client.getPin();
+        return -1;
+    }
+
+    public static boolean verifyAccount(int accountNumber){
+        return clientsAccounts.containsKey(accountNumber);
+    }
+
+    public static boolean verifyPin(int Pin, int accountNumber){
+        client client = clientsAccounts.get(accountNumber);
+        return client != null && client.getPin()==Pin;
     }
 
     @Override
