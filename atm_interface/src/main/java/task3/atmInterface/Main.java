@@ -1,4 +1,4 @@
-package task3.atm;
+package task3.atmInterface;
 
 public class Main {
     public static void main(String[] args) {

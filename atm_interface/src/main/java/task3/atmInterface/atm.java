@@ -1,4 +1,4 @@
-package task3.atm;
+package task3.atmInterface;
 
 public interface atm {
 
