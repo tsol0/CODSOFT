@@ -18,25 +18,47 @@ public abstract class atmMachine implements atm{
 
     }
 
+    public static Map<Integer, client> getClientDetails(){
+        return  clientsAccounts;
+    }
+
     private static void addClient(int accountNumber, int Pin, double balance){
         client client = new client(accountNumber, Pin, balance);
         clientsAccounts.put(accountNumber, client);
     }
 
+    public client getClientByAccountNumber(int accountNumber){
+        return  clientsAccounts.get(accountNumber);
+    }
+
+    public atmMachine(client client){
+        this.client = client;
+    }
+    
+    private double getBalance(int currentAccountNumber) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getClientBalance'");
+    }
+    private void updateBalance(int currentAccountNumber, double currentBalance) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateBalance'");
+    }
+
     @Override
     public double checkBalance() {
-        double standingBalance = getClientBalance(currentAccountNumber);
+        double standingBalance = getBalance(currentAccountNumber);
         System.out.println("Your Balance is R " +standingBalance);
         return standingBalance;
     }
 
+
     @Override
     public double deposit(double amount) {
-        double currentBalance = getClientBalance(currentAccountNumber);
+        double currentBalance = getBalance(currentAccountNumber);
         if (amount > 0){
             currentBalance += amount;
             updateBalance(currentAccountNumber, currentBalance);
-            System.out.println("Deposited " + amount + ". Current balance is: " + currentBalance);
+            System.out.println("Deposited " + amount + ". Current balance is: R " + currentBalance);
             checkBalance();
             return currentBalance;
         }
@@ -44,13 +66,14 @@ public abstract class atmMachine implements atm{
         return currentBalance;
     }
 
+
     @Override
     public double withdrawal(double amount) {
-        double currentBalance = getClientBalance(currentAccountNumber);
+        double currentBalance = getBalance(currentAccountNumber);
         if (amount <= currentBalance){
             currentBalance -= amount;
             updateBalance(currentAccountNumber, currentBalance);
-            System.out.println("Withdrew " + amount + ". Remaining balance is: " + currentBalance);
+            System.out.println("Withdrew " + amount + ". Remaining balance is: R " + currentBalance);
             checkBalance();
             return currentBalance;
         }
